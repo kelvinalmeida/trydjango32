@@ -1,5 +1,6 @@
 from django.urls import path
 
+
 from .views import home, create_article_view
 
 urlpatterns = [

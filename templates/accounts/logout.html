@@ -1,0 +1,11 @@
+<h1>Create a Article</h1>
+{% if request.user.is_authenticated %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Você já está logado, quer fazer logout?</p>
+    <input type="submit" value="Logout" style="margin-top: 10px;" />
+</form>
+{% else %}
+<p>Voce está deslogado</p>
+<a href="{% url 'login' %}">Fazer Login</a>
+{% endif %}

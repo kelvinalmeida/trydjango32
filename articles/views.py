@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from .models import ArticleModel
 
@@ -15,6 +16,7 @@ def home(request, *args, **kwargs):
     return render(request, 'articles/home.html', context)
 
 
+@login_required
 def create_article_view(request, *args, **kwargs):
     print(request.POST)
     context = {
