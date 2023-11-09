@@ -1,0 +1,11 @@
+<h1>Create a Article</h1>
+{% if object is None %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="create" style="margin-top: 10px;" />
+</form>
+{% else %}
+<p>Artigo Criado</p>
+<a href="{% url 'home' %}">Voltar Para Home</a>
+{% endif %}
