@@ -1,6 +1,26 @@
+from typing import Any
 from django import forms
 
-class ArticleForm(forms.Form):
+from .models import ArticleModel
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = ArticleModel
+        fields = ['title', 'content']
+
+
+    def clean(self):
+        data = self.cleaned_data
+        title = data.get('title')
+        qs = ArticleModel.objects.all().filter(title__contains=title)
+
+        if qs.exists(): 
+            self.add_error('title', f'Já existe titulo com esse nome \"{title}\"')
+
+        return data
+
+
+class ArticleFormOld(forms.Form):
     title = forms.CharField()
     content = forms.CharField()
 

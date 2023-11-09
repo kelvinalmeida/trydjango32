@@ -21,15 +21,18 @@ def home(request, *args, **kwargs):
 def create_article_view(request, *args, **kwargs):
     
     form = ArticleForm(request.POST or None)
-    print(dir(form))
+    # print(dir(form))
     context = {
         "form": form
     }
 
     if form.is_valid():
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        object_article = ArticleModel.objects.create(title=title , content=content)
+        article_obj = form.save()
+        form = ArticleForm()
+        context['form'] = form
+        # title = request.POST.get('title')
+        # content = request.POST.get('content')
+        # object_article = ArticleModel.objects.create(title=title , content=content)
 
     return render(request, 'articles/create.html', context)
 
